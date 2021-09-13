@@ -139,6 +139,17 @@ public:
     ++next_id_;
   }
 
+  /**
+   * @param ev Event to be processed.
+   * @param t  Time to process the event.
+   */
+  void schedule_at(event_type ev, Time t = Time{0}) {
+    assert(t >= Time{0});
+
+    scheduled_evs_.emplace(t, next_id_, ev);
+    ++next_id_;
+  }
+
   /// Process the next scheduled event.
   void step() {
     auto sev = scheduled_evs_.top();
