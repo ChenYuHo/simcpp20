@@ -409,7 +409,8 @@ protected:
     /// Destructor.
     virtual ~data() {
       for (auto &handle : handles_) {
-        handle.destroy();
+        if (handle)
+          handle.destroy();
       }
     }
 
